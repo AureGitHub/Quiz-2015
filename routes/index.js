@@ -6,7 +6,7 @@ var quizController = require('../controllers/quiz_controller');
 
 // Página de entrada (home page)
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Quiz' });
+  res.render('index', { title: 'Quiz', errors: [] });
 });
 
 
@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 router.param('quizId', quizController.load);  // autoload :quizId
 
 router.get('/author', function(req, res) {
-  res.render('author', { author: 'Jose Aurelio de Sande Villarroel' });
+  res.render('author', { author: 'Jose Aurelio de Sande Villarroel' , errors: []});
 });
 // Definición de rutas de /quizes
 //router.get('/quizes/:search?',quizController.index);
