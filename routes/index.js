@@ -10,6 +10,9 @@ router.get('/', function(req, res) {
 });
 
 
+// Autoload de comandos con :quizId
+router.param('quizId', quizController.load);  // autoload :quizId
+
 router.get('/author', function(req, res) {
   res.render('author', { author: 'Jose Aurelio de Sande Villarroel' });
 });
