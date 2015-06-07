@@ -19,8 +19,13 @@ router.get('/author', function(req, res) {
 // Definición de rutas de /quizes
 //router.get('/quizes/:search?',quizController.index);
 router.get('/quizes/:quizId(\\d+)',        quizController.show);
-router.get('/quizes/:search?',quizController.index);
+
 
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
+
+router.get('/quizes/new',                  quizController.new);
+router.post('/quizes/create',              quizController.create);
+
+router.get('/quizes/:search?',quizController.index);
 
 module.exports = router;
