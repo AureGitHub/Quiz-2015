@@ -5,7 +5,7 @@ var router = express.Router();
 var quizController = require('../controllers/quiz_controller');
 var commentController = require('../controllers/comment_controller');
 
-
+ 
 // Página de entrada (home page)
 router.get('/', function(req, res) {
   res.render('index', { title: 'Quiz', errors: [] });
