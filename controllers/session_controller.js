@@ -1,3 +1,21 @@
+// MW Comprueba si la session ha muerto (2 min)
+exports.sessionDead = function(req, res, next) {
+  if(req.session.user){
+    var actual = new Date().getTime();
+    console.log(actual);
+    console.log(req.session.user.timeout);
+    if(req.session.user.timeout > actual){
+      var timeout = actual + 6000; //regenero el timeout
+      req.session.user.timeout = timeout;
+    }else{
+      delete req.session.user;
+      req.session.errors = [{"message": 'Sesion Finalizada '}];
+      res.redirect('/login');
+    }
+  }
+  next();
+};
+
 // MW de autorización de accesos HTTP restringidos
 exports.loginRequired = function(req, res, next){
     if (req.session.user) {
@@ -33,7 +51,11 @@ exports.create = function(req, res) {
 
         // Crear req.session.user y guardar campos   id  y  username
         // La sesión se define por la existencia de:    req.session.user
-        req.session.user = {id:user.id, username:user.username};
+
+        //le añado 2 minutos a fecha actual
+        var timeout = new Date().getTime();
+        timeout+= 6000;
+        req.session.user = {id:user.id, username:user.username,timeout: timeout};
 
         res.redirect(req.session.redir.toString());// redirección a path anterior a login
     });
