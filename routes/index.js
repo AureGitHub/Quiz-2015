@@ -5,6 +5,7 @@ var router = express.Router();
 var quizController = require('../controllers/quiz_controller');
 var commentController = require('../controllers/comment_controller');
 var sessionController = require('../controllers/session_controller');
+var estadisticasController = require('../controllers/estadisticas_controllers');
 
 
 router.use(sessionController.sessionDead);
@@ -49,6 +50,7 @@ router.post('/quizes/:quizId(\\d+)/comments',               commentController.cr
 router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish',
 	                                    sessionController.loginRequired, commentController.publish);
 
+router.get('/quizes/statistics', estadisticasController.mostrar);
 router.get('/quizes/:search?',             quizController.index);
 
 module.exports = router;

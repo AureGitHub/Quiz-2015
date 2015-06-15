@@ -5,7 +5,7 @@ exports.sessionDead = function(req, res, next) {
     console.log(actual);
     console.log(req.session.user.timeout);
     if(req.session.user.timeout > actual){
-      var timeout = actual + 6000; //regenero el timeout
+      var timeout = actual + 120000; //regenero el timeout
       req.session.user.timeout = timeout;
     }else{
       delete req.session.user;
@@ -54,7 +54,7 @@ exports.create = function(req, res) {
 
         //le añado 2 minutos a fecha actual
         var timeout = new Date().getTime();
-        timeout+= 6000;
+        timeout+= 120000;
         req.session.user = {id:user.id, username:user.username,timeout: timeout};
 
         res.redirect(req.session.redir.toString());// redirección a path anterior a login
